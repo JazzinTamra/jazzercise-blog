@@ -8,6 +8,7 @@
 		<h1>Rebecca</h1>
 		<p>Rebecca is a young woman age 19. She&rsquo;s a is health conscience college student, and uses exercise to relieve stress. She has a crazy busy life filled with with school and a part-time job. She makes time for Jazzercise because she likes the hard workouts that keep her fit and looking good. Rebecca finds herself using the Jazzercise.com website on her Android phone with Kitkat daily when she plans her workout. Rebecca knows her way around the web, the Google Drive and social media, but is not especially technical. She won't be jail breaking her phone anytime soon. She attends classes at different times at different centers all over town, just so she can fit a workout in. She likes knowing what format to expect and what instructor will be teaching the class. Rebecca sees the blog topics on the Jazzercise home page when she visits the site, and clicks through to read when the topics are of interest. See uses the tips and sometime talks with her friend before class about the topics she reads about.</p>
 		<h1>Use Case 1 for Rebecca</h1>
+		<p>GOAL: For Rebecca to browse Jazzercise.com blog posts.</p>
 		<p>Rebecca is checking out the possible class times for tomorrow&rsquo;s workout and sees the blog titled &ldquo;Hairstyles for Hitting the Gym.&rdquo; She immediately clicks through since she is growing out her bangs and is finding alternatives to her current hairstyle. None of the pictures seem like options, but Monica has posted an idea in the comments that she just might try tomorrow.</p>
 		<p>Step for the use case: </p>
 		<ul>
@@ -16,7 +17,7 @@
 			<li>Action: Scrolls down and reads blog post topics</li>
 			<li>Action: Clicks VIEW ALL </li>
 			<li>Response: Loads www.jazzercise.com/Community/Blog</li>
-			<li>Action: Scrolls down to "Hairstyles for Hitting the Gym", Clicks READ MORE</li>
+			<li>Action: Scrolls down to &ldquo;Hairstyles for Hitting the Gym&rdquo; Clicks READ MORE</li>
 			<li>Response: Loads http://www.jazzercise.com/Community/Blog/September-2015/Hairstyles-for-Hitting-the-Gym</li>
 		</ul>
 		<h3>Blog Post Entity</h3>
@@ -29,7 +30,7 @@
 			<li>Blog content: text and images</li>
 		</ul>
 		<h3>Comments Entity</h3>
-		<h3>The Comments entity has a many to one relationship with a blog post.</h3>
+		<p>The Comments entity has a many to one relationship with a blog post.</p>
 		<h4>Attributes include:</h4>
 		<ul>
 			<li>Name</li>

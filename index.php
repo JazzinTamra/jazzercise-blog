@@ -8,67 +8,32 @@
 		<h1>Rebecca</h1>
 		<p>Rebecca is a young woman age 19. She&rsquo;s a is health conscience college student, and uses exercise to relieve stress. She has a crazy busy life filled with with school and a part-time job. She makes time for Jazzercise because she likes the hard workouts that keep her fit and looking good. Rebecca finds herself using the Jazzercise.com website on her Android phone with Kitkat daily when she plans her workout. Rebecca knows her way around the web, the Google Drive and social media, but is not especially technical. She won't be jail breaking her phone anytime soon. She attends classes at different times at different centers all over town, just so she can fit a workout in. She likes knowing what format to expect and what instructor will be teaching the class. Rebecca sees the blog topics on the Jazzercise home page when she visits the site, and clicks through to read when the topics are of interest. See uses the tips and sometime talks with her friend before class about the topics she reads about.</p>
 		<h1>Use Case 1 for Rebecca</h1>
-		<p>Rebecca is checking out the possible class times for tomorrow&rsquo;s workout and sees the blog titled &ldquo;Hairstyles for Hitting the Gym.&rdquo; She immediately clicks through since she is growing out her bangs and is finding alternatives to her current hairstyle. None of the pictures seem like options, but Monica has posted an idea that whe just might try tomorrow.</p>
-		<p>Step for use case: </p>
+		<p>Rebecca is checking out the possible class times for tomorrow&rsquo;s workout and sees the blog titled &ldquo;Hairstyles for Hitting the Gym.&rdquo; She immediately clicks through since she is growing out her bangs and is finding alternatives to her current hairstyle. None of the pictures seem like options, but Monica has posted an idea in the comments that she just might try tomorrow.</p>
+		<p>Step for the use case: </p>
 		<ul>
-			<ol>Action: Open browser and navigate to Jazzercise.com</ol>
-			<ol>Response: Home page loads</ol>
-			<ol>Action: Scrolls down and reads blog post topics</ol>
-			<ol>Action: Clicks VIEW ALL </ol>
-			<ol>Response: Loads www.jazzercise.com/Community/Blog</ol>
-			<ol>Action: Scrolls down to "Hairstyles for Hitting the Gym", Clicks READ MORE</ol>
-			<ol>Response: Loads http://www.jazzercise.com/Community/Blog/September-2015/Hairstyles-for-Hitting-the-Gym</ol>
+			<li>Action: Open browser and navigate to Jazzercise.com</li>
+			<li>Response: Home page loads</li>
+			<li>Action: Scrolls down and reads blog post topics</li>
+			<li>Action: Clicks VIEW ALL </li>
+			<li>Response: Loads www.jazzercise.com/Community/Blog</li>
+			<li>Action: Scrolls down to "Hairstyles for Hitting the Gym", Clicks READ MORE</li>
+			<li>Response: Loads http://www.jazzercise.com/Community/Blog/September-2015/Hairstyles-for-Hitting-the-Gym</li>
 		</ul>
-		<h1>Entities</h1>
+		<h3>Blog Post Entity</h3>
+		<p>The Blog Post entity has a one to many relationship with comments.</p>
+		<h4>Attributes include:</h4>
 		<ul>
-			<ol>Date and title</ol>
-			<ol>Image</ol>
-			<ol>Blog text</ol>
-			<ol>Images of hairstyles </ol>
-			<ol>Facebook and Twitter share buttons with counter</ol>
-			<ol>Comments, 2 comments have been made with date and time and REPORT ABUSE link</ol>
-			<ol>Leave Comment box with following fields</ol>
-			<ul>
-				<ol>Name</ol>
-				<ol>Email:</ol>
-				<ol>Your URL</ol>
-				<ol>Comments</ol>
-				<ol>Enter security code</ol>
-				<ol>Add button</ol>
-			</ul>
+			<li>Date</li>
+			<li>Title</li>
+			<li>Author</li>
+			<li>Blog content: text and images</li>
 		</ul>
-		<h1>Use Case 2 for Rebecca</h1>
-		<p>Rebecca tried the Fishtail hairstyle and got so many comments that she's decided to share the blog post on her facebook page.</p>
-		<p>Step for use case:</p>
+		<h3>Comments Entity</h3>
+		<h3>The Comments entity has a many to one relationship with a blog post.</h3>
+		<h4>Attributes include:</h4>
 		<ul>
-			<ol>Action: Open browser and navigate to Jazzercise.com</ol>
-			<ol>Response: Home page loads</ol>
-			<ol>Action: Scrolls down and reads blog post topics</ol>
-			<ol>Action: Clicks VIEW ALL </ol>
-			<ol>Response: Loads www.jazzercise.com/Community/Blog</ol>
-			<ol>Action: Scrolls down to "Hairstyles for Hitting the Gym", Clicks READ MORE</ol>
-			<ol>Response: Loads http://www.jazzercise.com/Community/Blog/September-2015/Hairstyles-for-Hitting-the-Gym</ol>
-			<ol>Action: Clicks the FACEBOOK SHARE BUTTON</ol>
-			<ol>Response: Opens a new window with Facebook log in</ol>
-			<ul>
-				<ol>Email or Phone:</ol>
-				<ol>Password:</ol>
-				<ol>Keep me logged in <em>Check box</em></ol>
-				<ol>Forgot your password? <em>ling</em> </ol>
-			<ul>
-			<ol>Action: Opens Share on Facebook</ol>
-				<ul>
-					<ol>Where to share dropdown</ol>
-					<ol>Say something box</ol>
-					<ol>Image</ol>
-					<ol>Title</ol>
-					<ol>Subtitle</ol>
-					<ol>JAZZERCISE.COM</ol>
-					<ol>Sharing options</ol>
-					<ol>Cancel</ol>
-					<ol>Share Link</ol>
-					<ol>Share Link</ol>
-				</ul>
-				<ol>Response: Posts on Facebook</ol>
-			</ul>
+			<li>Name</li>
+			<li>Email</li>
+			<li>Your URL</li>
+			<li>Comments content</li>
 		</ul>

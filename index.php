@@ -41,6 +41,6 @@
 			<li>blogPostId</li>
 			<li>commentId</li>
 		</ul>
-		<img src="jazzercise-blog-datadesign.svg" alt="Jazzercise Blog Entity Relationship Diagram">
+		<img src="img/jazzercise-blog" alt="Jazzercise Blog Entity Relationship Diagram"/>
 	</body>
 </html>

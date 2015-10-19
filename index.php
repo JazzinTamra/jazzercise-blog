@@ -10,10 +10,11 @@
 	</head>
 	<body>
 		<header>
-			<img src="img/logo.png.aspx"/>
+			<img class="openlogo" src="img/logo.png.aspx"/>
 			<img src="img/pageNameBg.png" />
 			<h1>Jazzercise Blog Persona</h1></header>
 		<main>
+			<img class="rebecca" src="img/rebecca-19yrs.jpg" alt="Picture of Rebecca">
 			<h2>Rebecca</h2>
 			<p>Rebecca is a young woman age 19. She&rsquo;s a is health conscience college student, and uses exercise to relieve stress. She has a crazy busy life filled with with school and a part-time job. She makes time for Jazzercise because she likes the hard workouts that keep her fit and looking good. Rebecca finds herself using the Jazzercise.com website on her Android phone with Kitkat daily when she plans her workout. Rebecca knows her way around the web, the Google Drive and social media, but is not especially technical. She won't be jail breaking her phone anytime soon. She attends classes at different times at different centers all over town, just so she can fit a workout in. She likes knowing what format to expect and what instructor will be teaching the class. Rebecca sees the blog topics on the Jazzercise home page when she visits the site, and clicks through to read when the topics are of interest. See uses the tips and sometime talks with her friend before class about the topics she reads about.</p>
 			<h2>Use Case for Rebecca</h2>
@@ -29,6 +30,7 @@
 				<li>Action: Scrolls down to &ldquo;Hairstyles for Hitting the Gym&rdquo; Clicks READ MORE</li>
 				<li>Response: Loads http://www.jazzercise.com/Community/Blog/September-2015/Hairstyles-for-Hitting-the-Gym</li>
 			</ul>
+			<img class="figure" src="img/jazzercise-blog-mrd.svg" alt="Jazzercise Blog Entity Relationship Diagram"/>
 		<h3>Blog Post Entity</h3>
 		<p>The Blog Post entity has a one to many relationship with comments.</p>
 		<h4>Attributes include:</h4>
@@ -50,7 +52,8 @@
 			<li>blogPostId</li>
 			<li>commentId</li>
 		</ul>
-		<img src="img/jazzercise-blog-datadesign.svg" alt="Jazzercise Blog Entity Relationship Diagram" />
+		<img class="figure" src="img/jazzercise-blog-mrd.png" alt="Jazzercise Blog Entity Relationship Diagram"/>
+			<img class="figure" src="img/jazzercise-blog-mrd.svg" alt="Jazzercise Blog Entity Relationship Diagram"/>
 		</main>
 	</body>
 </html>

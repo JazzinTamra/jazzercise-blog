@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<header>
-			<img class="openlogo" src="img/logo.png.aspx"/>
+			<img class="openlogo" src="img/logo.png"/>
 			<hr/>
 			<h1 class="blogtitle">Jazzercise Blog Persona</h1></header>
 		<main>

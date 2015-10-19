@@ -10,6 +10,7 @@
 	</head>
 	<body>
 		<header>
+			<img src="img/logo.png.aspx"/>
 			<img src="img/pageNameBg.png" />
 			<h1>Jazzercise Blog Persona</h1></header>
 		<main>
@@ -49,7 +50,7 @@
 			<li>blogPostId</li>
 			<li>commentId</li>
 		</ul>
-		<img src="img\jazzercise-blog-datadesign.svg" alt="Jazzercise Blog Entity Relationship Diagram" width="300px"/>
+		<img src="img/jazzercise-blog-datadesign.svg" alt="Jazzercise Blog Entity Relationship Diagram" />
 		</main>
 	</body>
 </html>

@@ -11,8 +11,8 @@
 	<body>
 		<header>
 			<img class="openlogo" src="img/logo.png.aspx"/>
-			<img src="img/pageNameBg.png" />
-			<h1>Jazzercise Blog Persona</h1></header>
+			<hr/>
+			<h1 class="blogtitle">Jazzercise Blog Persona</h1></header>
 		<main>
 			<img class="rebecca" src="img/rebecca-19yrs.jpg" alt="Picture of Rebecca">
 			<h2>Rebecca</h2>

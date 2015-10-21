@@ -88,11 +88,11 @@ public function setBlogAuthor($newBlogAuthor) {
 	$newBlogAuthor = trim($newBlogAuthor);
 	$newBlogAuthor = filter_var($newBlogAuthor, FILTER_SANITIZE_STRING);
 	if(empty($newBlogAuthor) === true) {
-		throw(new InvalidArgumentException("blog author is empty or insecure"));
+		throw(new InvalidArgumentException("blog author is insecure"));
 	}
 
 	//verify that the blog author will fit in the database
-	if(strlen($newBlogAuthor) > 140) {
+	if(strlen($newBlogAuthor) > 128) {
 		throw(new InvalidArgumentException("blog author is too long"));
 	}
 
@@ -121,7 +121,7 @@ public function setBlogDate($newBlogDate) {
 		return;
 	}
 
-	// store the tweet date
+	// store the blog date
 	try {
 		$newBlogDate = validateDate($newBlogDate);
 	} catch(InvalidArgumentException $invalidArgument) {
@@ -164,4 +164,36 @@ public function setBlogPost($newBlogPost) {
 
 	//store the blog post
 	$this->newBlogPost = $newBlogPost;
+}
+/**
+ * accessor method for blog title
+ *
+ * @return string value of blog title
+ */
+public function getBlogTitle() {
+	return($this->blogTitle);
+}
+/**
+ * mutator method for blog title
+ *
+ * @pram string $newBlogTitle new value of blog title
+ * @throws InvalidArgumentException if $newBlogTitle is not a string or insecure
+ * @throws RangeException is $newBlogTitle is > 128 characters
+ *
+ **/
+public function setBlogTitle($newBlogTitle) {
+	//verity the blog title is secure
+	$newBlogTitle = trim($newBlogTitle);
+	$newBlogTitle = filter_var($newBlogTitle, FILTER_SANITIZE_STRING);
+	if(empty($newBlogTitle) === true) {
+		throw(new InvalidArgumentException("blog title is empty or insecure"));
+	}
+
+	//verify that the blog title will fit in the database
+	if(strlen($newBlogTitle) > 128) {
+		throw(new InvalidArgumentException("blog title is too long"));
+	}
+
+	//store the blog title
+	$this->newBlogTitle = $newBlogTitle;
 }

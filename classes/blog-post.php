@@ -12,34 +12,65 @@ class BlogPost {
 	/**
 	 * id of this Blog Post; this is the primary key
 	 * @var int $blogPostId
-	 */
+	 **/
 	private $blogPostId;
 	/**
 	 * author of this Blog Post; string $blogAuthor
 	 * @var string $blogAuthor
-	 */
+	 **/
 	private $blogAuthor;
 	/**
-	 * date and time this Blog was poste, in a PHP DateTime object
+	 * date and time this Blog was posted, in a PHP DateTime object
 	 * @var DateTime $blogDate
-	 */
+	 **/
 	private $blogDate;
 	/**
 	 * actual textual content of the Blog Post
 	 * @var string $blogPost
-	 */
+	 **/
 	private $blogPost;
 	/**
 	 * title of this Blog Post
 	 * @var string $blogTitle
-	 */
+	 **/
 	private $blogTitle;
+
+	/**
+	 * constructor for this blog post
+	 *
+	 * @param mixed $newBlogPostId new value of blog post id
+	 * @param mixed $newBlogDate blog date as a DateTime object or string or null MySQL loads TIMESTAMP "now"
+	 * @param string $newBlogPost new value of blog post
+	 * @param string $newBlogTitle new value of blog title
+	 * @param string $newBlogAuthor new value of blog author or null is omitted
+	 * @throws InvalidArgumentException if data types are not valid
+	 * @throws RangeException if data values are not out of bounds (e.g., strings too long, negative integers)
+	 * @throws Exception if some other exception is thrown
+	 */
+	public function __construct($newBlogPostId, $newBlogDate, $newBlogPost, $newBlogTitle, $newBlogAuthor = null){
+		try {
+			$this->setBlogPostId($newBlogPostId);
+			$this->setBlogAuthor($newBlogAuthor);
+			$this->setBlogDate($newBlogDate);
+			$this->setBlogPost($newBlogPost);
+			$this->setBlogTitle($newBlogTitle);
+		} catch(InvalidArgumentException $invalidArgument) {
+			//rethrow the exception to the caller
+			throw(new InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(RangeException $range) {
+			//rethrow the exception to the caller
+			throw(new RangeException($range->getMessage(), 0, $range));
+		} catch(Exception $exception){
+			//rethrow a general exception
+			throw(new Exception($exception->getMessage(), 0, $exception));
+		}
+	}
 
 	/**
 	 * accessor method for Blog Post id
 	 *
 	 * @return mixed value of Blog Post id
-	 */
+	 **/
 	public function getBlogPostId() {
 		return ($this->blogPostId);
 	}
@@ -47,10 +78,10 @@ class BlogPost {
 	/**
 	 * mutator method for Blog Post id
 	 *
-	 * @pram mixed $newBlogPostId new value of blog post id
+	 * @param mixed $newBlogPostId new value of blog post id
 	 * @throws InvalidArgumentException if $newBlogPostId is not an integer
 	 * @throws RangeException if $newBlogPostId is not positive
-	 */
+	 **/
 	public function setBlogPostId($newBlogPostId) {
 		// base case: if the blog post id is null, this a new blog post without a mySQL assigned id (yet)
 		if($newBlogPostId === null) {
@@ -74,7 +105,7 @@ class BlogPost {
 	 * accessor method for blog author
 	 *
 	 * @return string value of blog author
-	 */
+	 **/
 	public function getBlogAuthor() {
 		return ($this->blogAuthor);
 	}
@@ -82,13 +113,12 @@ class BlogPost {
 	/**
 	 * mutator method for blog author
 	 *
-	 * @pram string $newBlogAuthor new value of blog author
-	 * @throws InvalidArgumentException if $newBlogAuthor is not a string or insecure
+	 * @param string $newBlogAuthor new value of blog author
 	 * @throws RangeException is $newBlogAuthor is > 128 characters
 	 *
 	 **/
 	public function setBlogAuthor($newBlogAuthor) {
-		//verity the blog author is secure
+		//verity the blog author is secure returns null if insecure
 		$newBlogAuthor = trim($newBlogAuthor);
 		$newBlogAuthor = filter_var($newBlogAuthor, FILTER_SANITIZE_STRING);
 
@@ -106,7 +136,7 @@ class BlogPost {
 	 * accessor method for blogDate
 	 *
 	 * @return DateTime value of blogDate
-	 */
+	 **/
 	public function getBlogDate() {
 		return ($this->blogDate);
 	}
@@ -114,13 +144,13 @@ class BlogPost {
 	/**
 	 * mutator method for blog date
 	 *
-	 * @param mixed $newBlogDate blog date as a DateTime object or string (or null to load the current time)
+	 * @param mixed $newBlogDate blog date as a DateTime object or string or null MySQL loads TIMESTAMP "now"
 	 * @throws InvalidArgumentException if $newBlogDate is not a valid object or string
 	 * @throws RangeException if $newBlogDate is a date that does not exist
 	 * @throws Exception if some other exception is thrown
 	 **/
 	public function setBlogDate($newBlogDate) {
-		//base case: if the date is null leave as null for MySQL to fill.
+		//base case: if the date is null MySQL fills with now to fill.
 		if($newBlogDate === null) {
 			$this->blogDate = new DateTime("now");
 			return;
@@ -143,7 +173,7 @@ class BlogPost {
 	 * accessor method for blog post
 	 *
 	 * @return string value of blog post
-	 */
+	 **/
 	public function getBlogPost() {
 		return ($this->blogPost);
 	}
@@ -151,7 +181,7 @@ class BlogPost {
 	/**
 	 * mutator method for blog post
 	 *
-	 * @pram string $newBlogPost new value of blog post
+	 * @param string $newBlogPost new value of blog post
 	 * @throws InvalidArgumentException if $newBlogPost is not a string or insecure
 	 * @throws RangeException is $newBlogPost is > 10000 characters
 	 *
@@ -177,7 +207,7 @@ class BlogPost {
 	 * accessor method for blog title
 	 *
 	 * @return string value of blog title
-	 */
+	 **/
 	public function getBlogTitle() {
 		return ($this->blogTitle);
 	}
@@ -185,7 +215,7 @@ class BlogPost {
 	/**
 	 * mutator method for blog title
 	 *
-	 * @pram string $newBlogTitle new value of blog title
+	 * @param string $newBlogTitle new value of blog title
 	 * @throws InvalidArgumentException if $newBlogTitle is not a string or insecure
 	 * @throws RangeException is $newBlogTitle is > 128 characters
 	 *

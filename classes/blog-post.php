@@ -236,4 +236,48 @@ class BlogPost {
 		//store the blog title
 		$this->newBlogTitle = $newBlogTitle;
 	}
+	/**
+	 * insert this Blog Post into mySQL
+	 *
+	 * @param PDO $pdo pointer to PDO connection
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public function insert(PDO $pdo) {
+		//enforce the blogPostId is null (i.e., don't insert a blog post that already exitsts)
+		if($this->blogPostId !== null) {
+			throw(new PDOException("not a new blog post"));
+		}
+		// create query template
+		$query = "INSERT INTO blogPost(blogDate, blogPost, blogTitle, blogAuthor) VALUES(:blogDate, :blogPost, :blogTitle, :blogAuthor)";
+		$statement = $pdo->prepare($query);
+
+		//bind the member variables to the place holders in the template
+		$formattedDate = $this->blogDate->format("Y-m-d H:i:s");
+		$parameters = array("blogDate" => $formattedDate, "blogPost" => $this->blogPost, "blogTitle"=> $this->blogTitle, "blogAuthor"=> $this->blogAuthor);
+		$statement->execute($parameters);
+
+		//update the null blogPostId with what mySQL just gave us
+		$this->blogPostId = intal($pdo->lastInsertId());
+	}
+	/**
+	 * deletes this blogPost from mySQL
+	 *
+	 * @param PDO $pdo pointer to PDO connection
+	 * @throws PDOException when mySQL related errors occur
+	 */
+	public function delete(PDO $pdo) {
+		//enforce the blogPostId is not null (i.e., don't delete a blog post that hasn't been inserted)
+		if($this->blogPostId===null) {
+			throw(new PODException("unable to delete a blog post that does not exist"));
+		}
+
+		//create query template
+		$query = "DELETE FROM blogPost WHERE blogPostId = :blogPostId";
+		$statement = $pdo->prepare($query);
+
+		//bind the member variables to the place holder in the template
+		$parameters = array("blogPostId" => $this->blogPostId);
+		$statement->execute($parameters);
+	}
+
 }

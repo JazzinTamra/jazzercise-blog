@@ -47,7 +47,7 @@ class BlogPost {
 	 * @throws RangeException if data values are not out of bounds (e.g., strings too long, negative integers)
 	 * @throws Exception if some other exception is thrown
 	 */
-	public function __construct($newBlogPostId, $newBlogDate, $newBlogPost, $newBlogTitle, $newBlogAuthor = null){
+	public function __construct($newBlogPostId, $newBlogDate, $newBlogPost, $newBlogTitle, $newBlogAuthor = null) {
 		try {
 			$this->setBlogPostId($newBlogPostId);
 			$this->setBlogAuthor($newBlogAuthor);
@@ -60,7 +60,7 @@ class BlogPost {
 		} catch(RangeException $range) {
 			//rethrow the exception to the caller
 			throw(new RangeException($range->getMessage(), 0, $range));
-		} catch(Exception $exception){
+		} catch(Exception $exception) {
 			//rethrow a general exception
 			throw(new Exception($exception->getMessage(), 0, $exception));
 		}
@@ -236,6 +236,7 @@ class BlogPost {
 		//store the blog title
 		$this->newBlogTitle = $newBlogTitle;
 	}
+
 	/**
 	 * insert this Blog Post into mySQL
 	 *
@@ -253,12 +254,13 @@ class BlogPost {
 
 		//bind the member variables to the place holders in the template
 		$formattedDate = $this->blogDate->format("Y-m-d H:i:s");
-		$parameters = array("blogDate" => $formattedDate, "blogPost" => $this->blogPost, "blogTitle"=> $this->blogTitle, "blogAuthor"=> $this->blogAuthor);
+		$parameters = array("blogDate" => $formattedDate, "blogPost" => $this->blogPost, "blogTitle" => $this->blogTitle, "blogAuthor" => $this->blogAuthor);
 		$statement->execute($parameters);
 
 		//update the null blogPostId with what mySQL just gave us
 		$this->blogPostId = intal($pdo->lastInsertId());
 	}
+
 	/**
 	 * deletes this blogPost from mySQL
 	 *
@@ -267,7 +269,7 @@ class BlogPost {
 	 */
 	public function delete(PDO $pdo) {
 		//enforce the blogPostId is not null (i.e., don't delete a blog post that hasn't been inserted)
-		if($this->blogPostId===null) {
+		if($this->blogPostId === null) {
 			throw(new PODException("unable to delete a blog post that does not exist"));
 		}
 
@@ -280,4 +282,27 @@ class BlogPost {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * updates this blog post in mySQL
+	 *
+	 * @param PDO $pdo pointer to PDO connection
+	 * @throws PDOException when mySQL related errors occur
+	 */
+	public function updat(PDO $pdo) {
+		//enforce the blogPostId is not null (i.e., don't update a blog post that hasn't been inserted)
+		if($this->blogPostId === null) {
+			throw(new PDOException("unable to update a blog post that does note exist"));
+		}
+
+		//create a query template QUESTION: why does this line not need VALUES(:blogDate, :blogPost, :blogTitle, :blogAuthor like insert above?
+		$query = "UPDATE blogPost SET blogDate  = :blogDate, blogPost = :blogPost, blogTitle = :blogTitle, blogAuthor = :blogAuthor WHERE blogPostId = :blogPostId";
+		$statement = $pdo->($query);
+
+		//bind the member variables to the place holders in the template
+		$formattedDate = $this->blogDate->format("Y-m-d H:i:s");
+		$parameters = array("blogDate" => $this->blogDate, "blogPost" => $this->blogPost, "blogTitle" => $this->blogTitle,
+			"blogAuthor" => $this->blogAuthor, "blogPostId" => $this->blogPostId);
+		$statement->execute($parameters);
+	}
+}
 }

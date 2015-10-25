@@ -258,7 +258,7 @@ class BlogPost {
 		$statement->execute($parameters);
 
 		//update the null blogPostId with what mySQL just gave us
-		$this->blogPostId = intal($pdo->lastInsertId());
+		$this->blogPostId = intval($pdo->lastInsertId());
 	}
 
 	/**
@@ -288,7 +288,7 @@ class BlogPost {
 	 * @param PDO $pdo pointer to PDO connection
 	 * @throws PDOException when mySQL related errors occur
 	 */
-	public function updat(PDO $pdo) {
+	public function update(PDO $pdo) {
 		//enforce the blogPostId is not null (i.e., don't update a blog post that hasn't been inserted)
 		if($this->blogPostId === null) {
 			throw(new PDOException("unable to update a blog post that does note exist"));
@@ -300,9 +300,51 @@ class BlogPost {
 
 		//bind the member variables to the place holders in the template
 		$formattedDate = $this->blogDate->format("Y-m-d H:i:s");
-		$parameters = array("blogDate" => $this->blogDate, "blogPost" => $this->blogPost, "blogTitle" => $this->blogTitle,
+		$parameters = array("blogDate" => $formattedDate, "blogPost" => $this->blogPost, "blogTitle" => $this->blogTitle,
 			"blogAuthor" => $this->blogAuthor, "blogPostId" => $this->blogPostId);
 		$statement->execute($parameters);
 	}
-}
+
+	/**
+	 * gets the Blog Post by content
+	 *
+	 * @param PDO $pdo pointer to PDO connection
+	 * @param string $blogPost blog post content to search for
+	 * @return splFixedArray all blog posts found for this content
+	 * @throws PDOException when mySQL related errors occur
+	 * QUESTION: Why won't PHP Storm remember the $pdo pointer? It wants to make it $PDO
+	 * QUESTION: Is there rhyme of reason to when a space is needed and when it is not?
+	 **/
+	public static function getBlogPostContent(PDO $pdo, $blogPost) {
+		// sanitize the description before searching
+		$blogPost = trim($blogPost);
+		$blogPost = filter_var($blogPost, FILTER_SANITIZE_STRING);
+		if(empty($blogPost) === true) {
+			throw(new PDOException("blog post content is invalid"));
+		}
+
+		//create a query template
+		$query = "SELECT blogPostId, blogDate, blogPost, blogTitle, blogAuthor FROM blogPost WHERE blogPost LIKE :blogPost";
+		$statement = $pdo->prepare($query);
+
+		//bind the blog post to the place holder in the template
+		$blogPost = "%$blogPost%";
+		$parameters = array("blogPost" => $blogPost);
+		$statement->execute($parameters);
+
+		// build an array of blog posts
+		$blogPosts = new SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$blogPost = new BlogPost($row["blogPostId"], $row["blogDate"], $row["blogPost"], $row["blogTitile"], $row["blogAuthor"]);
+				$blogPosts[$blogPost->key()] = $blogPost;
+				$blogPosts->next();
+			} catch(Exception $exception) {
+				// if the row could't be converted, rethrow it
+				throw(new PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($blogPosts);
+	}
 }

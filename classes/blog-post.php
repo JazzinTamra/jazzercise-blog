@@ -244,7 +244,7 @@ class BlogPost {
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function insert(PDO $pdo) {
-		//enforce the blogPostId is null (i.e., don't insert a blog post that already exitsts)
+		//enforce the blogPostId is null (i.e., don't insert a blog post that already exists)
 		if($this->blogPostId !== null) {
 			throw(new PDOException("not a new blog post"));
 		}
@@ -313,7 +313,7 @@ class BlogPost {
 	 * @return splFixedArray all blog posts found for this content
 	 * @throws PDOException when mySQL related errors occur
 	 * QUESTION: Why won't PHP Storm remember the $pdo pointer? It wants to make it $PDO
-	 * QUESTION: Is there rhyme of reason to when a space is needed and when it is not?
+	 * QUESTION: Is there rhyme or reason to when a space is needed and when it is not?
 	 **/
 	public static function getBlogPostContent(PDO $pdo, $blogPost) {
 		// sanitize the description before searching
@@ -341,7 +341,7 @@ class BlogPost {
 				$blogPosts[$blogPost->key()] = $blogPost;
 				$blogPosts->next();
 			} catch(Exception $exception) {
-				// if the row could't be converted, rethrow it
+				// if the row couldn't be converted, rethrow it
 				throw(new PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
